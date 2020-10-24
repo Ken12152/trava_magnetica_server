@@ -127,7 +127,7 @@ String button(int number)
     className += pinsStatus[number] == HIGH ? "button_on" : "button_off";
     
     String action = pinsStatus[number] == HIGH ? "off" : "on";
-    
+
     return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + label + "</button>";
 }
 

@@ -282,7 +282,7 @@ void loop()
         //Serial.println(F("Hello Master - Entered Program Mode"));
         uint8_t count = EEPROM.read(0);   // Read the first Byte of EEPROM that
         
-        //Serial.print(F("I have "));       // stores the number of ID's in EEPROM
+        //Serial.print(F("I have "));     // stores the number of ID's in EEPROM
         //Serial.print(count);
         //Serial.print(F(" record(s) on EEPROM"));
         //Serial.println("");
