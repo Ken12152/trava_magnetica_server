@@ -109,7 +109,8 @@ void body()
     String buttons = "";
 
     // Cria um botão para cada pino que possui um relê
-    for(int i = 0; i < PINS_COUNT; i++) {
+    //for(int i = 0; i < PINS_COUNT; i++) {
+    for(int i = 0; i < 2; i++) {
         buttons.concat(button(i));
     }
            
@@ -121,14 +122,17 @@ void body()
 // Cria um botão com a aparência e ação correspondente ao estado atual do relê
 String button(int number)
 {
-    String label = String(number + 1);
+    //String label = String(number + 1);
+    String label[2] = { "LED_ON", "LED_OFF" };
     
-    String className = "button ";
-    className += pinsStatus[number] == HIGH ? "button_on" : "button_off";
+    String className[2] = { "button button_on", "button button_off" };
+    //className += pinsStatus[number] == HIGH ? "button_on" : "button_off";
     
-    String action = pinsStatus[number] == HIGH ? "off" : "on";
+    //String action = pinsStatus[number] == HIGH ? "off" : "on";
+    String action[2] = { "on", "off" };
     
-    return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + label + "</button>";
+    //return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + label + "</button>";     
+    return "<button class=\"" + className[number] + "\"onclick=\"location.href='?" + action[number] + "=" + String(number + 1) + "'\">" + label[number] + "</button>";
 }
 
 
@@ -179,15 +183,16 @@ void execute(String action, String value)
   if(action == "on" || action == "off") {
     // Os relês são numerados a partir do 1, max o array começa do 0
     // então tiramos 1
-    int index = value.toInt() - 1;
+    //int index = value.toInt() - 1;
     
     // O número do pino será o índice mais o número do pino onde os relês
     // começam. Os relês devem estar em sequência a partir do pino inicial (FIRST_PIN)
-    int pinNumber = FIRST_PIN + index;
+    //int pinNumber = FIRST_PIN + index;
+    int pinNumber = relay;
     
     int status = action == "on" ? HIGH : LOW;
     
     digitalWrite(pinNumber, status);
-    pinsStatus[index] = status;
+    //pinsStatus[index] = status;
   }
 }
