@@ -108,7 +108,7 @@ void body()
 
     String buttons = "";
 
-    //Cria um botão para cada pino que possui um relê
+    // Cria um botão para cada pino que possui um relê
     for(int i = 0; i < PINS_COUNT; i++) {
         buttons.concat(button(i));
     }

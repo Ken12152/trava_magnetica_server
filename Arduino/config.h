@@ -1,9 +1,9 @@
-// define pins to test the server
-#define FIRST_PIN 4     //Pino onde está o primeiro relê
-#define PINS_COUNT 1    //Quantos pinos serão utilizados
+// Define pins to test the server
+#define FIRST_PIN 4     // Pino onde está o primeiro relê
+#define PINS_COUNT 1    // Quantos pinos serão utilizados
 
 
-// comment out if not use common anode
+// Comment out if not use common anode
 #define COMMON_ANODE
 
 #ifdef COMMON_ANODE
