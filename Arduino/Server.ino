@@ -123,12 +123,14 @@ String button(int number)
 {
     String label = String(number + 1);
     
-    String className = "button ";
-    className += pinsStatus[number] == HIGH ? "button_on" : "button_off";
+    String className = "button button_on";
+    //className += pinsStatus[number] == HIGH ? "button_on" : "button_off";
     
-    String action = pinsStatus[number] == HIGH ? "off" : "on";
+    //String action = pinsStatus[number] == HIGH ? "off" : "on";
+    String action = "on";
     
-    return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + label + "</button>";
+    return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + "Unlock" + "</button>";
+    //return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + label + "</button>";
 }
 
 
