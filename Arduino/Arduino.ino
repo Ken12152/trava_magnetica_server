@@ -146,7 +146,7 @@ void setup()
   Serial.println(F("-------------------"));
   Serial.println(F("Master Card's UID"));
   for (uint8_t i = 0; i < 4; i++) {          // Read Master Card's UID from EEPROM
-    masterCard[i] = EEPROM.read(2 + i);    // Write it to masterCard
+    masterCard[i] = EEPROM.read(2 + i);      // Write it to masterCard
     Serial.print(masterCard[i], HEX);
   }
   Serial.println("");

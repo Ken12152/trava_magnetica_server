@@ -83,17 +83,17 @@ void ShowReaderDetails()
 ///////////////////////////////////////// Cycle Leds (Program Mode) ///////////////////////////////////
 void cycleLeds() 
 {
-  digitalWrite(redLed, LED_OFF);  // Make sure red LED is off
-  digitalWrite(greenLed, LED_ON);   // Make sure green LED is on
-  digitalWrite(blueLed, LED_OFF);   // Make sure blue LED is off
+  digitalWrite(redLed, LED_OFF);   // Make sure red LED is off
+  digitalWrite(greenLed, LED_ON);  // Make sure green LED is on
+  digitalWrite(blueLed, LED_OFF);  // Make sure blue LED is off
   delay(200);
-  digitalWrite(redLed, LED_OFF);  // Make sure red LED is off
-  digitalWrite(greenLed, LED_OFF);  // Make sure green LED is off
-  digitalWrite(blueLed, LED_ON);  // Make sure blue LED is on
+  digitalWrite(redLed, LED_OFF);   // Make sure red LED is off
+  digitalWrite(greenLed, LED_OFF); // Make sure green LED is off
+  digitalWrite(blueLed, LED_ON);   // Make sure blue LED is on
   delay(200);
-  digitalWrite(redLed, LED_ON);   // Make sure red LED is on
-  digitalWrite(greenLed, LED_OFF);  // Make sure green LED is off
-  digitalWrite(blueLed, LED_OFF);   // Make sure blue LED is off
+  digitalWrite(redLed, LED_ON);    // Make sure red LED is on
+  digitalWrite(greenLed, LED_OFF); // Make sure green LED is off
+  digitalWrite(blueLed, LED_OFF);  // Make sure blue LED is off
   delay(200);
 }
 
@@ -114,7 +114,7 @@ void normalModeOn()
 void readID(uint8_t number) 
 {
   uint8_t start = (number * 4) + 2;           // Figure out starting position
-  for (uint8_t i = 0; i < 4; i++) {          // Loop 4 times to get the 4 Bytes
+  for (uint8_t i = 0; i < 4; i++) {           // Loop 4 times to get the 4 Bytes
     storedCard[i] = EEPROM.read(start + i);   // Assign values read from EEPROM to array
   }
 }
@@ -162,10 +162,10 @@ void deleteID(byte a[])
     looping = ((num - slot) * 4);
     num--;                          // Decrement the counter by one
     EEPROM.write( 0, num );         // Write the new count to the counter
-    for(j = 0; j < looping; j++) {                         // Loop the card shift times
+    for(j = 0; j < looping; j++) {                           // Loop the card shift times
       EEPROM.write(start + j, EEPROM.read(start + 4 + j));   // Shift the array values to 4 places earlier in the EEPROM
     }
-    for (uint8_t k = 0; k < 4; k++) {                       // Shifting loop
+    for (uint8_t k = 0; k < 4; k++) {                        // Shifting loop
       EEPROM.write(start + j + k, 0);
     }
     successDelete();

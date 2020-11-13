@@ -129,7 +129,7 @@ String button(int number)
     //String action = pinsStatus[number] == HIGH ? "off" : "on";
     String action = "on";
     
-    return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + "Unlock" + "</button>";
+    return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + "DESBLOQUEAR" + "</button>";
     //return "<button class=\"" + className + "\"onclick=\"location.href='?" + action + "=" + label + "'\">" + label + "</button>";
 }
 
