@@ -1,6 +1,6 @@
 ///////////////////////// FUNCOES DO RFID /////////////////////////
 
-
+// Apenas granted(), denided(), cycleLeds(), normalModeOn(), 
 
 /////////////////////////////////////////  Access Granted    ///////////////////////////////////
 void granted(uint16_t setDelay) 
@@ -28,6 +28,7 @@ void denied()
 
 
 ///////////////////////////////////////// Get PICC's UID ///////////////////////////////////
+/*
 uint8_t getID() 
 {
   // Getting ready for Reading PICCs
@@ -77,6 +78,7 @@ void ShowReaderDetails()
     while(true); // do not go further
   }
 }
+*/
 
 
 
@@ -111,6 +113,7 @@ void normalModeOn()
 
 
 //////////////////////////////////////// Read an ID from EEPROM //////////////////////////////
+/*
 void readID(uint8_t number) 
 {
   uint8_t start = (number * 4) + 2;           // Figure out starting position
@@ -304,3 +307,4 @@ bool monitorWipeButton(uint32_t interval)
   }
   return true;
 }
+*/

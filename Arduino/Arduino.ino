@@ -1,3 +1,7 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// CODIGO REFERENTE AO RFID ESTA TUDO COMENTADO!!! /////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 #include <EEPROM.h>     // We are going to read and write PICC's UIDs from/to EEPROM
 #include <SPI.h>        // RC522 Module uses SPI protocol
 #include <MFRC522.h>    // Library for Mifare RC522 Devices
@@ -71,7 +75,8 @@ void setup()
 
 
   /////////////// Logica para restaurar EEPROM do Arduino, aciona se continuar pressionado botao 'wipeB' na hora de inicializar ///////////////
-  
+
+  /*
   // Wipe Code - If the Button (wipeB) Pressed while setup run (powered on) it wipes EEPROM
   if(digitalRead(wipeB) == LOW) {       // when button pressed pin should get low, button connected to ground
     digitalWrite(redLed, LED_ON);       // Red Led stays on to inform user we are going to wipe
@@ -111,12 +116,13 @@ void setup()
       digitalWrite(redLed, LED_OFF);
     }
   }
+  */
 
 
 
 
   /////////////// Logica para registrar master card ///////////////
-  
+  /*
   // Check if master card defined, if not let user choose a master card
   // This also useful to just redefine the Master Card
   // You can keep other EEPROM records just write other than 143 to EEPROM address 1
@@ -139,6 +145,7 @@ void setup()
     EEPROM.write(1, 143);                    // Write to EEPROM we defined Master Card.
     //Serial.println(F("Master Card Defined"));
   }
+  */
 
 
 
@@ -181,7 +188,7 @@ void loop()
 
 
   /////////////// Logiaca pra Limpar EEPROM ///////////////
-  
+  /*
   // When device is in use if wipe button pressed for 10 seconds initialize Master Card wiping
   if(digitalRead(wipeB) == LOW) {       // Check if button is pressed
       
@@ -204,13 +211,16 @@ void loop()
     }
     //Serial.println(F("Master Card Erase Cancelled"));
   }
-
+  */
 
 
 
   /////////////// Logica pra Leitura do cartao ///////////////
-  //uint8_t successRead = getID();  // Variable integer to keep if we have Successful Read from Reader
-
+  uint8_t successRead = false;
+  /*
+  //successRead = getID();  // Variable integer to keep if we have Successful Read from Reader
+  */
+  
   /////////////// se nao tiver nenhuma requisicao e nem cartao lido pula p proximo ciclo ///////////////
   if(!Serial.available() && successRead == false) {
     return;
@@ -272,7 +282,7 @@ void loop()
 
 
   /////////////// tratamento sobre cartao lido pelo RFID ///////////////
-  
+  /*
   if(successRead == true) {
     ///////////////////////// modo de registro /////////////////////////
     if(programMode) {
@@ -324,5 +334,6 @@ void loop()
         }
       }
     }
-  }
+  } if(successRead == true)
+  */
 }
