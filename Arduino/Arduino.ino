@@ -27,7 +27,8 @@ int pinsStatus[PINS_COUNT];
 ////////////////////////////////////////////////////////////////////////////////////////
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(9600);
+  //Serial.begin(115200);
 
 
   /////////////// Configurar pinos ///////////////
@@ -58,7 +59,7 @@ void setup()
 
 
   // Protocol Configuration
-  Serial.begin(9600);    // Initialize serial communications with PC
+  //Serial.begin(9600);    // Initialize serial communications with PC
   SPI.begin();           // MFRC522 Hardware uses SPI protocol
   mfrc522.PCD_Init();    // Initialize MFRC522 Hardware
 
