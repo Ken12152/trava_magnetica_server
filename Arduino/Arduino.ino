@@ -15,7 +15,7 @@ byte masterCard[4];   // Stores master card's ID read from EEPROM
 
 
 // Create MFRC522 instance.
-MFRC522 mfrc522(SS_PIN, RST_PIN);
+//MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 
 // Mantém o estado atual dos pinos (HIGH ou LOW)
@@ -27,8 +27,8 @@ int pinsStatus[PINS_COUNT];
 ////////////////////////////////////////////////////////////////////////////////////////
 void setup()
 {
-  Serial.begin(115200);
-
+  Serial.begin(9600);
+  //Serial.begin(115200);
 
   /////////////// Configurar pinos ///////////////
   
@@ -58,9 +58,9 @@ void setup()
 
 
   // Protocol Configuration
-  Serial.begin(9600);    // Initialize serial communications with PC
-  SPI.begin();           // MFRC522 Hardware uses SPI protocol
-  mfrc522.PCD_Init();    // Initialize MFRC522 Hardware
+  //Serial.begin(9600);    // Initialize serial communications with PC
+  //SPI.begin();           // MFRC522 Hardware uses SPI protocol
+  //mfrc522.PCD_Init();    // Initialize MFRC522 Hardware
 
 
 
@@ -209,7 +209,7 @@ void loop()
 
 
   /////////////// Logica pra Leitura do cartao ///////////////
-  uint8_t successRead = getID();  // Variable integer to keep if we have Successful Read from Reader
+  //uint8_t successRead = getID();  // Variable integer to keep if we have Successful Read from Reader
 
   /////////////// se nao tiver nenhuma requisicao e nem cartao lido pula p proximo ciclo ///////////////
   if(!Serial.available() && successRead == false) {
