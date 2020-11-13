@@ -20,7 +20,8 @@ uint8_t buffer[MAX_BUFFER];
 
 void setup() 
 {
-  Serial.begin(115200);
+  Serial.begin(9600);
+  //Serial.begin(115200);
 
   // Envia a informação da rede para conectar
   WiFi.disconnect();
