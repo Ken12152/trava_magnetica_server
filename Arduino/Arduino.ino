@@ -18,10 +18,6 @@ byte masterCard[4];   // Stores master card's ID read from EEPROM
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 
-// Mantém o estado atual dos pinos (HIGH ou LOW)
-int pinsStatus[PINS_COUNT];
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
