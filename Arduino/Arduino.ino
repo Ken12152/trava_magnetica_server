@@ -239,10 +239,12 @@ void loop()
       else {
         if(findID(readCard)) {            // If not, see if the card is in the EEPROM
           Serial.println(F("Welcome, You shall pass"));
+          Serial.println(F("-----------------------------"));
           granted(300);                   // Open the door lock for 300 ms
         }
         else {                            // If not, show that the ID was not valid
           Serial.println(F("You shall not pass"));
+          Serial.println(F("-----------------------------"));
           denied();
         }
       }
