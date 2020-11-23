@@ -26,19 +26,6 @@ void setup()
   Serial.begin(9600);
   //Serial.begin(115200);
 
-
-  /////////////// Configurar pinos ///////////////
-  
-  // Coloca os pinos que estão ligados os relês como saída
-  for(int i = 0; i < PINS_COUNT; i++) {
-    pinsStatus[i] = LOW;
-    
-    int pinNumber = FIRST_PIN + i;
-    pinMode(pinNumber, OUTPUT);
-    digitalWrite(pinNumber, pinsStatus[i]);
-  }
-
-
   // Arduino Pin Configuration
   pinMode(redLed,   OUTPUT);
   pinMode(greenLed, OUTPUT);
