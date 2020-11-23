@@ -132,11 +132,11 @@ void writeID(byte a[])
     for (uint8_t j = 0; j < 4; j++) {
       EEPROM.write(start + j, a[j]);  // Write the array values to EEPROM in the right position
     }
-    successWrite();
+    //successWrite();
     Serial.println(F("Succesfully added ID record to EEPROM"));
   }
   else {
-    failedWrite();
+    //failedWrite();
     Serial.println(F("Failed! There is something wrong with ID or bad EEPROM"));
   }
 }
@@ -147,7 +147,7 @@ void writeID(byte a[])
 void deleteID(byte a[]) 
 {
   if(!findID(a)) {      // Before we delete from the EEPROM, check to see if we have this card!
-    failedWrite();      // If not
+    //failedWrite();      // If not
     Serial.println(F("Failed! There is something wrong with ID or bad EEPROM"));
   }
   else {
@@ -168,7 +168,7 @@ void deleteID(byte a[])
     for (uint8_t k = 0; k < 4; k++) {                        // Shifting loop
       EEPROM.write(start + j + k, 0);
     }
-    successDelete();
+    //successDelete();
     Serial.println(F("Succesfully removed ID record from EEPROM"));
   }
 }

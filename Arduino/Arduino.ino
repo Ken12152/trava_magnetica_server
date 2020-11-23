@@ -26,20 +26,6 @@ void setup()
   Serial.begin(9600);
   //Serial.begin(115200);
 
-  // Arduino Pin Configuration
-  pinMode(redLed,   OUTPUT);
-  pinMode(greenLed, OUTPUT);
-  pinMode(blueLed,  OUTPUT);
-  pinMode(wipeB,    INPUT_PULLUP);   // Enable pin's pull up resistor
-  pinMode(relay,    OUTPUT);
-
-  // Be careful how relay circuit behave on while resetting or power-cycling your Arduino
-  digitalWrite(relay, HIGH);        // Make sure door is locked
-  digitalWrite(redLed, LED_OFF);    // Make sure led is off
-  digitalWrite(greenLed, LED_OFF);  // Make sure led is off
-  digitalWrite(blueLed, LED_OFF);   // Make sure led is off
-
-
 
   // Protocol Configuration
   //Serial.begin(9600);    // Initialize serial communications with PC
@@ -50,51 +36,6 @@ void setup()
 
   //Serial.println(F("Access Control Example v0.1"));   // For debugging purposes
   ShowReaderDetails();  // Show details of PCD - MFRC522 Card Reader details
-
-
-
-
-  /////////////// Logica para restaurar EEPROM do Arduino, aciona se continuar pressionado botao 'wipeB' na hora de inicializar ///////////////
-  
-  // Wipe Code - If the Button (wipeB) Pressed while setup run (powered on) it wipes EEPROM
-  if(digitalRead(wipeB) == LOW) {       // when button pressed pin should get low, button connected to ground
-    digitalWrite(redLed, LED_ON);       // Red Led stays on to inform user we are going to wipe
-    
-    Serial.println(F("Wipe Button Pressed"));
-    Serial.println(F("You have 10 seconds to Cancel"));
-    Serial.println(F("This will be remove all records and cannot be undone"));
-    
-    bool buttonState = monitorWipeButton(10000);              // Give user enough time to cancel operation
-    
-    if(buttonState == true && digitalRead(wipeB) == LOW) {    // If button still be pressed, wipe EEPROM
-      Serial.println(F("Starting Wiping EEPROM"));
-      
-      for (uint16_t x = 0; x < EEPROM.length(); x = x + 1) {   // Loop end of EEPROM address
-        if(EEPROM.read(x) == 0) {                             // If EEPROM address 0
-          // do nothing, already clear, 
-          // go to the next address in order 
-          // to save time and reduce writes to EEPROM
-        }
-        else {
-          EEPROM.write(x, 0);  // if not write 0 to clear, it takes 3.3mS
-        }
-      }
-      Serial.println(F("EEPROM Successfully Wiped"));
-      digitalWrite(redLed, LED_OFF);  // visualize a successful wipe
-      delay(200);
-      digitalWrite(redLed, LED_ON);
-      delay(200);
-      digitalWrite(redLed, LED_OFF);
-      delay(200);
-      digitalWrite(redLed, LED_ON);
-      delay(200);
-      digitalWrite(redLed, LED_OFF);
-    }
-    else {
-      Serial.println(F("Wiping Cancelled")); // Show some feedback that the wipe button did not pressed for 15 seconds
-      digitalWrite(redLed, LED_OFF);
-    }
-  }
 
 
 
@@ -111,10 +52,6 @@ void setup()
     uint8_t successRead;
     do {
       successRead = getID();         // sets successRead to 1 when we get read from reader otherwise 0
-      digitalWrite(blueLed, LED_ON);         // Visualize Master Card need to be defined
-      delay(200);
-      digitalWrite(blueLed, LED_OFF);
-      delay(200);
     } while(!successRead);                   // Program will not go further while you not get a successful read
     
     for (uint8_t j = 0; j < 4; j++) {        // Loop 4 times
@@ -136,10 +73,6 @@ void setup()
   Serial.println(F("-------------------"));
   Serial.println(F("Everything is ready"));
   Serial.println(F("Waiting PICCs to be scanned"));
-
-
-  
-  cycleLeds();    // Everything ready lets give user some feedback by cycling leds
 }
 
 
@@ -150,46 +83,6 @@ void setup()
 ////////////////////////////////////////////////////////////////////////////////////////
 void loop()
 {
-  /////////////// Sializacao ///////////////
-  
-  if(programMode) {
-    cycleLeds();            // Program Mode cycles through Red Green Blue waiting to read a new card
-  }
-  else {
-    normalModeOn();         // Normal mode, blue Power LED is on, all others are off
-  }
-
-
-
-
-  /////////////// Logiaca pra Limpar EEPROM ///////////////
-  
-  // When device is in use if wipe button pressed for 10 seconds initialize Master Card wiping
-  if(digitalRead(wipeB) == LOW) {       // Check if button is pressed
-      
-    // Visualize normal operation is iterrupted by pressing wipe button Red is like more Warning to user
-    digitalWrite(redLed, LED_ON);       // Make sure led is off
-    digitalWrite(greenLed, LED_OFF);    // Make sure led is off
-    digitalWrite(blueLed, LED_OFF);     // Make sure led is off
-      
-    // Give some feedback
-    Serial.println(F("Wipe Button Pressed"));
-    Serial.println(F("Master Card will be Erased! in 10 seconds"));
-      
-    bool buttonState = monitorWipeButton(10000);              // Give user enough time to cancel operation
-    
-    if(buttonState == true && digitalRead(wipeB) == LOW) {    // If button still be pressed, wipe EEPROM
-      EEPROM.write(1, 0);   // Reset Magic Number.
-      Serial.println(F("Master Card Erased from device"));
-      Serial.println(F("Please reset to re-program Master Card"));
-      while(1);
-    }
-    Serial.println(F("Master Card Erase Cancelled"));
-  }
-
-
-
-
   /////////////// Logica pra Leitura do cartao ///////////////
   uint8_t successRead = getID();  // Variable integer to keep if we have Successful Read from Reader
 
@@ -239,11 +132,13 @@ void loop()
       else {
         if(findID(readCard)) {            // If not, see if the card is in the EEPROM
           Serial.println(F("Welcome, You shall pass"));
-          granted(300);                   // Open the door lock for 300 ms
+          Serial.println(F("-----------------------------"));
+          //granted(300);                   // Open the door lock for 300 ms
         }
         else {                            // If not, show that the ID was not valid
           Serial.println(F("You shall not pass"));
-          denied();
+          Serial.println(F("-----------------------------"));
+          //denied();
         }
       }
     }
