@@ -41,12 +41,12 @@ uint8_t getID()
   // There are Mifare PICCs which have 4 byte or 7 byte UID care if you use 7 byte PICC
   // I think we should assume every PICC as they have 4 byte UID
   // Until we support 7 byte PICCs
-  //Serial.println(F("Scanned PICC's UID:"));
+  Serial.println(F("Scanned PICC's UID:"));
   for (uint8_t i = 0; i < 4; i++) {
     readCard[i] = mfrc522.uid.uidByte[i];
-    //Serial.print(readCard[i], HEX);
+    Serial.print(readCard[i], HEX);
   }
-  //Serial.println("");
+  Serial.println("");
   mfrc522.PICC_HaltA(); // Stop reading
   return 1;
 }
